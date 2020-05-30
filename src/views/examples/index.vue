@@ -15,20 +15,20 @@
   </div>
 </template>
 <script>
-import eSselect from './es-select'
-import eSButton from './es-button'
+import esSelect from './es-select'
+import esButton from './es-button'
 
 export default {
   components: {
-    eSselect,
-    eSButton
+    esSelect,
+    esButton
   },
   data() {
     return {
-      tab: 'eSButton',
+      tab: 'esButton',
       tabsData: [
-        'eSselect',
-        'eSButton'
+        'esSelect',
+        'esButton'
       ]
     }
   }

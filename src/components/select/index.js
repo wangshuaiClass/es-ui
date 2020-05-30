@@ -1,4 +1,4 @@
-import select from './src'
+import select from './src/select'
 
 export default {
   install(Vue) {
