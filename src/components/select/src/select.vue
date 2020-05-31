@@ -1,25 +1,40 @@
 <template>
-  <div class="es-select">
+  <div :style="{ width }" class="es-select">
 
-    <input @click="showDrop = !showDrop" ref="v1" class="es-select__inner" type="text" placeholder="请选择">
+    <input
+      v-model="selectValue"
+      @focus="showDrop = true"
+      ref="v1"
+      class="es-select__inner"
+      type="text"
+      placeholder="请选择">
     
     <transition name="select-drop--transition">
-      <ul v-if="showDrop" ref="es-option" class="es-select__dropdown">
-        <es-option></es-option>
-        <!-- <li @click="showDrop = !showDrop" class="es-select--option">菜单二</li> -->
+      <ul v-show="showDrop" ref="es-option" class="es-select__dropdown">
+        <slot />
       </ul>
     </transition>
-
+    
   </div>
 </template>
 <script>
 // isServer
-import { createPopper } from '@popperjs/core'
+// import * as Popper from '@popperjs/core'
 // import esOption from './option'
 
 export default {
   name: 'es-select',
   // components: { esOption },
+  props: {
+    // v-model bind value
+    value: {
+      required: true
+    },
+    width: {
+      type: String,
+      default: '100%'
+    }
+  },
   provide() {
     return {
       'select': this
@@ -27,59 +42,73 @@ export default {
   },
   data() {
     return {
-      showDrop: true
+      showDrop: false,
+      // value
+      selectValue: '',
+      // show label text
+      selectLabel: '',
+
+      // poperIns: null
     }
   },
   watch: {
     showDrop: {
       immediate: true,
       handler(showDrop) {
-        showDrop && this.$refs['es-option'] && createPopper(this.$refs.v1, this.$refs['es-option'], {
-          modifiers: [
-            {
-              name: 'offset',
-              options: {
-                offset: [0, 6]
-              }
-            }
-          ]
-        })
+        // showDrop
+        // ? this.poperIns = Popper.createPopper(this.$refs.v1, this.$refs['es-option'], {
+        //   placement: 'bottom'
+        // })
+        // : this.poperIns && this.poperIns.destroy()
       }
     }
+  },
+  methods: {
+    /**
+     * close select dropdown
+     * params: null || label
+     */
+    closeDropdown(optionLabel) {
+      this.selectValue = optionLabel
+      this.showDrop = false
+    }
+  },
+  mounted() {
+    this.selectValue = this.value || ''
+    console.log(this.$refs.default)
   }
 }
 </script>
 <style lang="less" scoped>
 .es-select {
-  width: 200px;
+  position: relative;
 }
 .es-select__inner {
-  width: 200px;
+  width: 100%;
   border: none;
   outline: none;
   box-sizing: border-box;
   padding: 8px 15px;
   border-radius: 2px;
   border: 1px solid #ddd;
+  cursor: pointer;
   &:focus {
     border: 1px solid @primary-color;
   }
 }
 .es-select__dropdown {
-  width: 200px;
+  width: 100%;
   border-radius: 2px;
   background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  opacity: 1;
   position: absolute;
-}
-.es-select--option {
-  cursor: pointer;
-  padding: 4px 8px;
-  color: #333333;
-  &:hover {
-    background: #f4f5f9;
-    color: @primary-color;
-  }
+  margin-top: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .select-drop--transition-enter-active,

@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      tab: 'esButton',
+      tab: 'esSelect',
       tabsData: [
         'esSelect',
         'esButton'
