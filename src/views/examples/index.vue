@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="example-page">
     <ul class="_tab">
       <li
         :class="tab === el ? '_active' : ''"
@@ -9,7 +9,7 @@
         {{ el }}
       </li>
     </ul>
-    <div style="background:#f4f5f6">
+    <div class="_container">
       <components :is="tab"></components>
     </div>
   </div>
@@ -35,16 +35,30 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-._tab {
+.example-page {
   display: flex;
-  li {
-    border: 1px solid #999;
-    padding: 5px 10px;
-    margin: 10px;
-    cursor: pointer;
-    &._active {
-      color: red;
+  ._tab {
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    li {
+      color: #999;
+      border-radius: 2px;
+      border: 0.4px solid #999;
+      padding: 6px 10px;
+      margin: 10px;
+      cursor: pointer;
+      transition: all 0.32s;
+      &._active {
+        color: @primary-color;
+        border-color: @primary-color;
+      }
     }
+  }
+  ._container {
+    background: #f4f5f6;
+    flex: 1;
+    min-height: 100vh;
   }
 }
 </style>
