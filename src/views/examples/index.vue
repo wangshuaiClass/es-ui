@@ -43,10 +43,7 @@ export default {
     flex-direction: column;
     li {
       color: #999;
-      border-radius: 2px;
-      border: 0.4px solid #999;
       padding: 6px 10px;
-      margin: 10px;
       cursor: pointer;
       transition: all 0.32s;
       &._active {
