@@ -2,9 +2,10 @@
   <div :style="{ width }" class="es-select">
 
     <input
-      v-model="selectValue"
+      :readonly="readonly"
+      v-model="selectLabel"
       @focus="showDrop = true"
-      ref="v1"
+      ref="input"
       class="es-select__inner"
       type="text"
       placeholder="请选择">
@@ -33,7 +34,8 @@ export default {
     width: {
       type: String,
       default: '100%'
-    }
+    },
+    filterable: Boolean
   },
   provide() {
     return {
@@ -45,10 +47,15 @@ export default {
       showDrop: false,
       // value
       selectValue: '',
-      // show label text
       selectLabel: '',
+      selectIndex: null,
 
-      // poperIns: null
+      options: []
+    }
+  },
+  computed: {
+    readonly() {
+      return !this.filterable
     }
   },
   watch: {
@@ -68,14 +75,25 @@ export default {
      * close select dropdown
      * params: null || label
      */
-    closeDropdown(optionLabel) {
-      this.selectValue = optionLabel
+    closeDropdown(selectValue, optionLabel) {
+      this.selectLabel = optionLabel
+      this.selectValue = selectValue
+      this.$emit('input', selectValue)
+      // this.$refs.input.focus()
       this.showDrop = false
+    },
+    getLabel() {
+      this.options.forEach((e, i) => {
+        if (this.selectValue === e.value) {
+          this.selectLabel = e.label
+          this.selectIndex = i
+        }
+      })
     }
   },
   mounted() {
     this.selectValue = this.value || ''
-    console.log(this.$refs.default)
+    this.getLabel()
   }
 }
 </script>

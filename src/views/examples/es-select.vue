@@ -26,12 +26,20 @@ export default {
       selectValue: 'liuqingkun',
       optsData: [
         {
-          value: 'liuqingkun',
-          label: '刘清坤'
+          value: 'one',
+          label: '德玛'
         },
         {
-          value: 'wangzhengshi',
-          label: '王正式'
+          value: 'two',
+          label: '赵信'
+        },
+        {
+          value: 'three',
+          label: '亚索'
+        },
+        {
+          value: 'four',
+          label: '数据库啦菲拉斯阿三链接拉萨解放了阿加莎拉法基'
         }
       ]
     }
