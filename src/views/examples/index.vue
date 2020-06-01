@@ -6,7 +6,7 @@
         @click="tab = el"
         v-for="(el, i) in tabsData"
         :key="i">
-        {{ el }}
+        <es-button :type="tab === el ? '' : 'plain'">{{ el }}</es-button>
       </li>
     </ul>
     <div class="_container">
@@ -15,20 +15,20 @@
   </div>
 </template>
 <script>
-import esSelect from './es-select'
-import esButton from './es-button'
+import esSelectDemo from './es-select'
+import esButtonDemo from './es-button'
 
 export default {
   components: {
-    esSelect,
-    esButton
+    esSelectDemo,
+    esButtonDemo
   },
   data() {
     return {
-      tab: 'esSelect',
+      tab: 'esSelectDemo',
       tabsData: [
-        'esSelect',
-        'esButton'
+        'esSelectDemo',
+        'esButtonDemo'
       ]
     }
   }
@@ -38,7 +38,7 @@ export default {
 .example-page {
   display: flex;
   ._tab {
-    width: 140px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     li {
