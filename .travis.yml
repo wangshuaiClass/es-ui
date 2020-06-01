@@ -31,4 +31,4 @@ deploy:
   keep-history: true
   on:
     branch: dev
-  local-dir: public
+  # local-dir: public
