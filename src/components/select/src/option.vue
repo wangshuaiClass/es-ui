@@ -2,7 +2,10 @@
   <li
     @click="onClickOption(label)"
     class="es-select--option"
-    :class="itemIsSelected() ? 'selected' : ''">
+    v-show="filtered"
+    :class="[
+      itemIsSelected() ? 'selected' : ''
+    ]">
     {{ label }}
   </li>
 </template>
@@ -18,15 +21,21 @@ export default {
   },
   data() {
     return {
-      currentLabel: ''
+      // currentLabel: '',
+      filtered: true
     }
   },
   methods: {
     onClickOption(label) {
+      this.select.$refs.input.focus()
       this.select.closeDropdown(this.value, label)
     },
     itemIsSelected() {
       return this.select.selectValue === this.value
+    },
+    inputFilterQuery(text) {
+      this.filtered = this.label.includes(text)
+      console.log(this.select.options)
     }
   },
   created() {
@@ -38,6 +47,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+@primary-color: #fc54c3;
 li {
   list-style: none;
 }
@@ -48,6 +58,7 @@ li {
   text-align: left;
   text-indent: 12px;
   font-size: 14px;
+  width: 100%;
   &:hover {
     background: #f4f5f9;
     color: @primary-color;

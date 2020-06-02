@@ -2,7 +2,7 @@
   <button
     @click="onClick"
     class="es-button"
-    :style="{ width: block ? '100%' : '' }"
+    :style="{ display: block ? 'block' : 'inline-block' }"
     :class="[
       type ? `es-button--${type}` : '',
       round ? 'es-button__round' : ''
@@ -40,6 +40,7 @@ button {
   cursor: pointer;
 }
 .es-button {
+  box-sizing: border-box;
   border-radius: 2px;
   color: #ffffff;
   background: @primary-color;
@@ -47,7 +48,7 @@ button {
   border: 1px solid @primary-color;
   padding: 7.5px 20px;
   position: relative;
-  margin: 14px;
+  margin-right: 14px;
   &.es-button--plain {
     background: none;
     color: #606266;
