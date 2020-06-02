@@ -1,17 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <style>
+    /* body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    } */
+
+    .wavy {
+      position: relative;
+      -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+      margin-top: 280px;
+      text-align: center;
+    }
+
+    .wavy span {
+      position: relative;
+      display: inline-block;
+      color: #000;
+      font-size: 2em;
+      animation: animate 1s ease-in-out infinite;
+      animation-delay: calc(.1s*var(--i))
+    }
+
+    @keyframes animate {
+      0% {
+        transform: translateY(0px)
+      }
+
+      20% {
+        transform: translateY(-24px)
+      }
+
+      40%,
+      100% {
+        transform: translateY(0px)
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+      Please enable it to continue.</strong>
+  </noscript>
+  <div id="app">
+    <div class="wavy">
+      <span style="--i:1">S</span>
+      <span style="--i:2">U</span>
+      <span style="--i:3">R</span>
+      <span style="--i:4">P</span>
+      <span style="--i:5">R</span>
+      <span style="--i:6">I</span>
+      <span style="--i:7">S</span>
+      <span style="--i:8">E</span>
+      <span style="--i:9">.</span>
+      <span style="--i:10">.</span>
+    </div>
+  </div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
