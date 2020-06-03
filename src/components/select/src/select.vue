@@ -1,5 +1,8 @@
 <template>
-  <div :style="{ width }" class="es-select">
+  <div
+    v-outside-click="handleClickOutside"
+    :style="{ width }"
+    class="es-select">
 
     <input
       :readonly="readonly"
@@ -11,9 +14,12 @@
       type="text"
       placeholder="请选择">
     
-    <transition name="select-drop--transition">
-      <div v-show="showDrop" ref="es-option" class="es-select__dropdown">
-        <ul v-show="!isEmpty">
+    <transition
+      name="select-drop--transition"
+      @after-leave="doDestroyPoper">
+      <div id="id2" ref="es-option" v-show="showDrop" class="es-select-drop">
+        <div ref="arrow" data-popper-arrow class="arrow"></div>
+        <ul v-show="!isEmpty" class="es-select__dropdown">
           <slot />
         </ul>
         <p v-show="isEmpty" class="is-empty">暂无数据</p>
@@ -24,7 +30,7 @@
 </template>
 <script>
 // isServer
-// import * as Popper from '@popperjs/core'
+import { createPopper } from '@popperjs/core'
 // import esOption from './option'
 
 export default {
@@ -54,7 +60,9 @@ export default {
       selectLabel: '',
       selectIndex: null,
 
-      options: []
+      options: [],
+
+      poperIns: null
     }
   },
   computed: {
@@ -67,27 +75,46 @@ export default {
   },
   watch: {
     showDrop: {
-      // immediate: true,
       handler(val) {
         if (!val) {
-          if (this.$refs.input) {
-            // this.$refs.input.blur()
-          }
+          if (this.$refs.input) {}
         } else {
           this.$refs.input.focus()
+          const $d1 = this.$refs['input']
+          const $d2 = this.$refs['es-option']
+          const $a1 = this.$refs.arrow
+          this.poperIns = createPopper($d1, $d2, {
+            placement: 'bottom',
+            // strategy: 'fixed',
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 10]
+                }
+              },
+              {
+                name: 'flip',
+                options: {
+                  fallbackPlacements: ['top']
+                }
+              },
+              {
+                name: 'arrow',
+                options: {
+                  padding: 15
+                }
+              }
+            ]
+          })
         }
-        // showDrop
-        // ? this.poperIns = Popper.createPopper(this.$refs.v1, this.$refs['es-option'], {
-        //   placement: 'bottom'
-        // })
-        // : this.poperIns && this.poperIns.destroy()
       }
     }
   },
   methods: {
     /**
      * close select dropdown
-     * params: null || label
+     * @params: null || label optionLabel
      */
     closeDropdown(selectValue, optionLabel) {
       this.selectLabel = optionLabel
@@ -103,17 +130,55 @@ export default {
         }
       })
     },
+    // filter
     handleKeyup(e) {
       this.options = this.options.filter(e => e.label.includes(this.selectLabel))
       this.$children.forEach($_option => {
         $_option.inputFilterQuery(this.selectLabel)
       })
       this.showDrop = true
+    },
+    handleClickOutside() {
+      this.showDrop = false
+    },
+    doDestroyPoper() {
+      this.poperIns && this.poperIns.destroy()
     }
   },
   mounted() {
     this.selectValue = this.value || ''
     this.getLabel()
+    // const d1 = document.querySelector('#id1')
+    // const d2 = document.querySelector('#id2')
+    // createPopper(d1, d2, {
+    //   placement: 'bottom',
+    //   modifiers: [
+    //     {
+    //       name: 'flip',
+    //       options: {
+    //         fallbackPlacements: ['top']
+    //       }
+    //     }
+    //   ]
+    // })
+  },
+  directives: {
+    'outside-click': {
+      bind(el, binding) {
+        el._outsideClickEvent = e => {
+          if (!el.contains(e.target)) {
+            binding.value(e)
+          }
+        }
+        setTimeout(() => {
+          document.body.addEventListener('click', el._outsideClickEvent)
+        }, 0)
+      },
+      unbind(el) {
+        document.body.removeEventListener('click', el._outsideClickEvent)
+        delete el._outsideClickEvent
+      }
+    }
   }
 }
 </script>
@@ -145,33 +210,31 @@ export default {
     border: 1px solid @primary-color;
   }
 }
+.es-select-drop {
+  width: 100%;
+  background: #ffffff;
+}
 .es-select__dropdown {
   width: 100%;
   border-radius: 2px;
   background: #ffffff;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   opacity: 1;
-  position: absolute;
-  margin-top: 8px;
   max-height: 240px;
   overflow-y: auto;
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  &::before {
-    content: ' ';
-    position: absolute;
-    display: inline-block;
-    top: -7px;
-    opacity: 0.8;
-    left: 20px;
-    width: 5px;
-    height: 5px;
-    background: @primary-color;
-    border-radius: 50%;
-  }
+  padding: 4px 0;
 }
-
+.arrow {
+  border-top: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  border-left: 6px solid transparent;
+  position: absolute;
+  top: -12px;
+}
 .select-drop--transition-enter-active,
 .select-drop--transition-leave-active {
   opacity: 1;

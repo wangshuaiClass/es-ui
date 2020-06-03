@@ -12,6 +12,11 @@
           </es-option>
         </es-select>
       </li>
+      <li style="width:100%">
+        <div style="height:500px;width:100%">
+          噗噗噗噗噗
+        </div>
+      </li>
       <li>
         <span>普通</span>
         <es-select width="300px" v-model="selectValue">
@@ -22,6 +27,12 @@
             :label="el.label">
           </es-option>
         </es-select>
+        {{ selectValue }}
+      </li>
+      <li style="width:100%">
+        <div style="height:500px;width:100%">
+          噗噗噗噗噗
+        </div>
       </li>
       <li>
         <span>可搜索</span>
@@ -41,7 +52,7 @@
 export default {
   data() {
     return {
-      selectValue: 'liuqingkun',
+      selectValue: 'yasuo',
       optsData2: [
         // {
         //   value: 'wocao',
@@ -50,31 +61,31 @@ export default {
       ],
       optsData: [
         {
-          value: 'one',
+          value: 'dema',
           label: '德玛'
         },
         {
-          value: 'two',
+          value: 'zhaoxin',
           label: '赵信'
         },
         {
-          value: 'two1',
+          value: 'zhaoxin',
           label: '赵信'
         },
         {
-          value: 'three',
+          value: 'yasuo',
           label: '亚索'
         },
         {
-          value: 'four',
+          value: 'fuckasfa',
           label: '数据库啦菲拉斯阿三链接拉萨解放了阿加莎拉法基'
         },
         {
-          value: 'two',
+          value: 'zhaoxin222',
           label: '赵信'
         },
         {
-          value: 'two',
+          value: 'zhaoxin',
           label: '赵信'
         }
       ]
@@ -86,10 +97,14 @@ export default {
 .list {
   display: flex;
   flex-wrap: wrap;
+  // width: 800px;
+  // height: 400px;
+  // border: 1px solid deeppink;
+  overflow: auto;
   li {
     // display: flex;
     // width: 50%;
-    margin-bottom: 15px;
+    // margin-bottom: 15px;
     span {
       font-size: 14px;
       line-height: 32px;
