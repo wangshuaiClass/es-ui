@@ -20,18 +20,21 @@
 <script>
 import esSelectDemo from './es-select'
 import esButtonDemo from './es-button'
+import esConfirmDemo from './es-confirm'
 
 export default {
   components: {
     esSelectDemo,
-    esButtonDemo
+    esButtonDemo,
+    esConfirmDemo
   },
   data() {
     return {
       tab: 'esSelectDemo',
       tabsData: [
         'esSelectDemo',
-        'esButtonDemo'
+        'esButtonDemo',
+        'esConfirmDemo'
       ]
     }
   },
@@ -58,7 +61,7 @@ export default {
     }
     .gay:hover {
       opacity: 0.8;
-      transform: rotate(-66deg);
+      transform: rotate(-106deg);
     }
     li {
       color: #999;
