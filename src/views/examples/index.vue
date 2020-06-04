@@ -21,12 +21,14 @@
 import esSelectDemo from './es-select'
 import esButtonDemo from './es-button'
 import esConfirmDemo from './es-confirm'
+import esLoadingDemo from './es-loading'
 
 export default {
   components: {
     esSelectDemo,
     esButtonDemo,
-    esConfirmDemo
+    esConfirmDemo,
+    esLoadingDemo
   },
   data() {
     return {
@@ -34,7 +36,8 @@ export default {
       tabsData: [
         'esSelectDemo',
         'esButtonDemo',
-        'esConfirmDemo'
+        'esConfirmDemo',
+        'esLoadingDemo'
       ]
     }
   },
