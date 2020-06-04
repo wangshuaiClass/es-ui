@@ -2,7 +2,7 @@
     <transition name="es-loading-fade">
         <div v-show="showLoading" class="es-loading-mask">
             <div class="loading-box">
-                <div class="loading-icon"></div>
+                <div class="loader-08"></div>
             </div>
         </div>
     </transition>
@@ -37,6 +37,8 @@
         display: inline-block;
         border-radius: 3px;
         font-size: 30px;
+        width: 40px;
+        height: 40px;
         color: @primary-color;
         transition: .3s color, .3s border;
         .loading-icon {
@@ -71,6 +73,38 @@
                 border: .2em solid currentcolor;
                 border-radius: 50%;
             }
+        }
+    }
+    .loader-08 {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .loader-08::before,
+    .loader-08::after {
+        content: '';
+        width: inherit;
+        height: inherit;
+        border-radius: 50%;
+        background-color: deeppink;
+        opacity: 0.6;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: loader-08 2.0s infinite ease-in-out;
+    }
+    .loader-08::after {
+        -webkit-animation-delay: -1.0s;
+        animation-delay: -1.0s;
+    }
+    @keyframes loader-08 {
+        0%, 100% {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+        50% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
         }
     }
     .es-loading-fade-enter-active, .es-loading-fade-active {
