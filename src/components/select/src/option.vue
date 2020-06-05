@@ -4,7 +4,8 @@
     class="es-select--option"
     v-show="filtered"
     :class="[
-      itemIsSelected() ? 'selected' : ''
+      itemIsSelected() ? 'selected' : '',
+      disabled ? 'is-disabled': '' 
     ]">
     {{ label }}
   </li>
@@ -17,7 +18,8 @@ export default {
     value: {
       required: true
     },
-    label: {}
+    label: {},
+    disabled: Boolean
   },
   data() {
     return {
@@ -27,6 +29,7 @@ export default {
   },
   methods: {
     onClickOption(label) {
+      if (this.disabled) return
       this.select.$refs.input.focus()
       this.select.closeDropdown(this.value, label)
     },
@@ -65,6 +68,10 @@ li {
   }
   &.selected {
     color: @primary-color;
+  }
+  &.is-disabled {
+    color: #e4e4e4;
+    cursor: not-allowed;
   }
 }
 </style>

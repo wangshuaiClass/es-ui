@@ -32,6 +32,15 @@
         </div>
         <br>
         <es-switch false-label="暗" true-label="亮" v-model="loading2"></es-switch>
+
+        <es-button @click="showDialog = true">弹框</es-button>
+        <es-dialog :visible="showDialog" @close="showDialog = false">
+            <div>
+                <es-select v-model="selectValue">
+                    <es-option :value="123" label="第一个"></es-option>
+                </es-select>
+            </div>
+        </es-dialog>
     </div>
 </template>
 <script>
@@ -39,7 +48,9 @@
         data() {
             return {
                 loading: false,
-                loading2: false
+                loading2: false,
+                showDialog: false,
+                selectValue: ''
             }
         }
     }

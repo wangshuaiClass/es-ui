@@ -51,6 +51,7 @@
           <es-option
             v-for="(el, i) in optsData"
             :key="i"
+            :disabled="el.disabled"
             :value="el.value"
             :label="el.label">
           </es-option>
@@ -73,11 +74,13 @@ export default {
       optsData: [
         {
           value: 'dema',
-          label: '德玛'
+          label: '德玛',
+          disabled: true
         },
         {
           value: 'zhaoxin',
-          label: '赵信'
+          label: '赵信',
+          disabled: true
         },
         {
           value: 'zhaoxin',
