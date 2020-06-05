@@ -10,7 +10,9 @@
       @click="showDrop = !showDrop"
       @keyup="handleKeyup"
       ref="input"
+      :disabled="disabled"
       class="es-select__inner"
+      :class="disabled ? 'is_disabled':''"
       type="text"
       placeholder="请选择">
     
@@ -45,7 +47,11 @@ export default {
       type: String,
       default: '100%'
     },
-    filterable: Boolean
+    filterable: Boolean,
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   provide() {
     return {
@@ -191,6 +197,10 @@ export default {
   .is-empty {
     font-size: 14px;
     padding: 8px;
+  }
+  .is_disabled {
+    cursor: not-allowed;
+    background: #f4f5f9;
   }
 }
 

@@ -61,10 +61,10 @@ export default {
       transition: all .4s ease-in-out;
       transform-origin: 95% 40%;
       margin: 0 auto;
-    }
-    .gay:hover {
-      opacity: 0.8;
-      transform: rotate(-106deg);
+      &:hover {
+        opacity: 0.8;
+        transform: rotate(-106deg);
+      }
     }
     li {
       color: #999;

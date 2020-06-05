@@ -45,6 +45,17 @@
           </es-option>
         </es-select>
       </li>
+      <li>
+        <span>禁用</span>
+        <es-select disabled filterable width="300px" v-model="selectValue">
+          <es-option
+            v-for="(el, i) in optsData"
+            :key="i"
+            :value="el.value"
+            :label="el.label">
+          </es-option>
+        </es-select>
+      </li>
     </ul>
   </div>
 </template>
