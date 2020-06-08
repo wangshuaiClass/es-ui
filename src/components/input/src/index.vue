@@ -72,6 +72,7 @@ export default {
         this.clearableFlg = true
       }
     },
+    // mouseleave 
     mouseleave() {
       this.clearableEnter = false
       this.clearableFlg = false
