@@ -50,7 +50,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-@primary-color: #fc54c3;
+// @primary-color: #fc54c3;
 li {
   list-style: none;
 }

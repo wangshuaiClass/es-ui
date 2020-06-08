@@ -189,7 +189,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-@primary-color: #fc54c3;
+// @primary-color: #fc54c3;
 
 .es-select {
   display: inline-block;
@@ -197,6 +197,7 @@ export default {
   .is-empty {
     font-size: 14px;
     padding: 8px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
   .is_disabled {
     cursor: not-allowed;

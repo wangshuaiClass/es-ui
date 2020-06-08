@@ -86,7 +86,7 @@ export default {
   width: inherit;
   height: inherit;
   border-radius: 50%;
-  background-color: deeppink;
+  background-color: @primary-color;
   opacity: 0.6;
   position: absolute;
   top: 0;

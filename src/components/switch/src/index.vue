@@ -40,7 +40,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-@primary-color: #fc54c3;
+// @primary-color: #fc54c3;
 
 .es-switch {
   width: 44px;
@@ -88,7 +88,7 @@ export default {
   }
   &:focus {
     outline: none;
-    background: #f148b7;
+    background: #2d80d8;
   }
   &:after {
     content: "";

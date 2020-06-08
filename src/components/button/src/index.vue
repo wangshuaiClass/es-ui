@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@primary-color: #fc54c3;
+// @primary-color: #fc54c3;
 
 button {
   box-sizing: border-box;
@@ -94,7 +94,7 @@ button {
   }
   &:focus {
     outline: none;
-    background: #f148b7;
+    background: #3086e0;
   }
   &:after {
     content: "";
