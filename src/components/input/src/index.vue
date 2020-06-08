@@ -1,7 +1,9 @@
 <template>
-  <div :class="[isFocus ? 'es-input-focus' : '', 'es-input']">
+  <div :class="[isFocus ? 'es-input-focus' : '', 'es-input']" @mouseenter="mouseenter" @mouseleave="mouseleave">
     <input type="text" v-model="value2" :placeholder="placeholder" @focus="focus()" @blur="blur()" @input="handleInput" />
-    <i class="icon-clear"></i>
+    <i class="icon-clear" v-if="clearableFlg" @click="clear">
+      <img src="../images/x.png" alt="">
+    </i>
   </div>
 </template>
 <script>
@@ -24,21 +26,55 @@ export default {
   data() {
     return {
       isFocus: false,
-      value2: ''
+      value2: '',
+      clearableFlg: false,
+      clearableEnter: false,
     };
   },
   mounted() {
 
   },
+  watch: {
+    value2(val) {
+      if(this.clearable) {
+        if(val && this.clearableEnter) {
+          this.clearableFlg = true
+        } else {
+          this.clearableFlg = false
+        }
+      } else {
+        this.clearableFlg = false
+      }
+        
+    }
+  },
   methods: {
+    // 聚焦
     focus() {
       this.isFocus = true;
     },
+    // 离焦
     blur() {
       this.isFocus = false;
     },
+    // 提交
     handleInput() {
       this.$emit('input', this.value2)
+    },
+    // 清除
+    clear() {
+      this.value2 = ''
+    },
+    // mouseenter
+    mouseenter() {
+      if(this.clearable && this.value2) {
+        this.clearableEnter = true
+        this.clearableFlg = true
+      }
+    },
+    mouseleave() {
+      this.clearableEnter = false
+      this.clearableFlg = false
     }
   }
 };
@@ -52,6 +88,7 @@ export default {
   border-radius: 4px;
   overflow: hidden;
   transition: 0.3s all;
+  position: relative;
   input {
     width: 100%;
     height: 100%;
@@ -59,13 +96,18 @@ export default {
     text-indent: 1em;
     outline-style: none;
   }
-  .icon-clear:before{
-    content: '';
-    background:url("../images/x.png") no-repeat;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    z-index: 111;
+  .icon-clear{
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top:8px;
+    right:8px;
+    z-index: 999;
+    cursor: pointer;
+    img{
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 .es-input:hover {
